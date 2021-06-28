@@ -1,5 +1,7 @@
 # find vaccination centers
 
-first run `bundle exec find_centers`
+- run `bundle install`
+- run `bundle exec ruby find_centers.rb`
+- run `bundle exec ruby find_availabilities.rb`
 
-then update with find_availabilities
+in order to update `center-availabilities.csv` with the latest availabilities
