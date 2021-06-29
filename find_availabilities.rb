@@ -36,14 +36,14 @@ end
 
 CSV.open("centers-availabilities.csv", "w") do |output|
   CSV.open("centers-code.csv", headers: true) do |csv|
-    output << %w[name address] + TYPES
+    output << %w[name address url] + TYPES
 
     csv.each do |row|
       code = row["code"]
       url = "https://www.nhs.uk/service-search/find-a-walk-in-coronavirus-covid-19-vaccination-site/profile/#{code}"
       info = parse_url(url)
 
-      output << [row["name"], info.address] + info.availabilities.values_at(*TYPES)
+      output << [row["name"], info.address, url] + info.availabilities.values_at(*TYPES)
     end
   end
 end

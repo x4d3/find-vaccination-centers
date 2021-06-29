@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Find vaccination centers</title>
+        <meta name="author" content="x4d3">
+        <meta content="Find vaccination centers">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+              integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <main class="row">
+                <div class="col">
+                    <h1>Find vaccination centers</h1>
+
+                    <div id="table-container"></div>
+                </div>
+            </main>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery.csv.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+        <script src="js/csv_to_html_table.js"></script>
+
+        <script>
+            function formatLink(link) {
+                if (link) {
+                    const split = link.split("/")
+                    return "<a href='" + link + "' target='_blank'>" + split[split.length - 1] + "</a>";
+                } else {
+                    return "";
+                }
+            }
+
+            function formatBoolean(b) {
+                if (b === "true" ) {
+                    return "✅";
+                } else {
+                    return "❌";
+                }
+            }
+
+            CsvToHtmlTable.init({
+                csv_path: "centers-availabilities.csv",
+                element: "table-container",
+                allow_download: true,
+                csv_options: {
+                    separator: ",",
+                    delimiter: '"'
+                },
+                datatables_options: {
+                    paging: false
+                },
+                custom_formatting: [
+                    [2, formatLink],
+                    [3,formatBoolean],
+                    [4,formatBoolean],
+                    [5,formatBoolean],
+                    [6,formatBoolean],
+                    [7,formatBoolean],
+                    [8,formatBoolean]
+                ]
+            });
+        </script>
+    </body>
+
+</html>
